@@ -41,7 +41,7 @@
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" name="BlueBackground"/>
+                        <color key="backgroundColor" systemColor="systemGray5Color"/>
                         <constraints>
                             <constraint firstItem="2Sb-HO-Wz7" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="0GD-5I-zjM"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="rsD-6P-UCM" secondAttribute="trailing" constant="16" id="CUc-5I-iIL"/>
@@ -67,8 +67,11 @@
     </scenes>
     <resources>
         <namedColor name="BlueBackground">
-            <color red="0.29803921568627451" green="0.70588235294117641" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.29800000786781311" green="0.70599997043609619" blue="0.80400002002716064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

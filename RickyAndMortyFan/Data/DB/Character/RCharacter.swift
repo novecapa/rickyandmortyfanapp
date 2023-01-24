@@ -55,9 +55,6 @@ extension RCharacter {
                     realm.add(newCharacters, update: .modified)
                 }
             }
-//                DispatchQueue.main.async {
-//                    completion(successBool, errorMsg)
-//                }
         }
     }
     

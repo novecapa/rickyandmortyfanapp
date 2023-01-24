@@ -20,10 +20,8 @@ class Utils {
     // MARK: - Check Internet connection
     static func existsConnection() -> Bool {
         if Reachability.isConnectedToNetwork() {
-            // print("Internet Connection Available!")
             return true
         } else {
-            // print("Internet Connection not Available!")
             return false
         }
     }

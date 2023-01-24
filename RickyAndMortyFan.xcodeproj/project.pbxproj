@@ -161,7 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				72E7A893297E85F400D732F5 /* Info.plist */,
-				72E7A8B5297E861D00D732F5 /* Common */,
 				72E7A8B6297E862400D732F5 /* Helpers */,
 				72E7A8B7297E862B00D732F5 /* DI */,
 				72E7A8B8297E863200D732F5 /* Data */,
@@ -190,13 +189,6 @@
 			path = RickyAndMortyFanUITests;
 			sourceTree = "<group>";
 		};
-		72E7A8B5297E861D00D732F5 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
 		72E7A8B6297E862400D732F5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,7 +211,6 @@
 			children = (
 				72E7A8E6297EC8E800D732F5 /* DB */,
 				72E7A8BC297E868900D732F5 /* DTO */,
-				72F40422297FA39900494EA8 /* NetworkClient */,
 				72E7A8BD297E869600D732F5 /* Repository */,
 			);
 			path = Data;
@@ -256,8 +247,6 @@
 			isa = PBXGroup;
 			children = (
 				72E7A8C3297E87DC00D732F5 /* Character */,
-				72E7A8C4297E87E500D732F5 /* Location */,
-				72E7A8C5297E87EB00D732F5 /* Episode */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -327,20 +316,6 @@
 			path = Character;
 			sourceTree = "<group>";
 		};
-		72E7A8C4297E87E500D732F5 /* Location */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Location;
-			sourceTree = "<group>";
-		};
-		72E7A8C5297E87EB00D732F5 /* Episode */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Episode;
-			sourceTree = "<group>";
-		};
 		72E7A8D4297E934400D732F5 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,13 +339,6 @@
 				72E7A8EA297ECADD00D732F5 /* RCharacter.swift */,
 			);
 			path = Character;
-			sourceTree = "<group>";
-		};
-		72F40422297FA39900494EA8 /* NetworkClient */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NetworkClient;
 			sourceTree = "<group>";
 		};
 		72F40425297FA46800494EA8 /* Presentation */ = {

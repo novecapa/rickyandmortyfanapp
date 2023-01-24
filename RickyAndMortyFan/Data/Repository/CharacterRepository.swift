@@ -33,7 +33,6 @@ final class CharacterRepository: CharacterRepositoryProtocol {
             throw CharacterRepositoryError.badURL
         }
         let request = URLRequest(url: url)
-        print(request)
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let response = response as? HTTPURLResponse else {
@@ -71,7 +70,6 @@ final class CharacterRepository: CharacterRepositoryProtocol {
             throw CharacterRepositoryError.badURL
         }
         let request = URLRequest(url: url)
-        print(request)
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let response = response as? HTTPURLResponse else {
@@ -112,7 +110,6 @@ final class CharacterRepository: CharacterRepositoryProtocol {
             throw CharacterRepositoryError.badURL
         }
         let request = URLRequest(url: url)
-        print(request)
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let response = response as? HTTPURLResponse else {
