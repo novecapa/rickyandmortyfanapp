@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		72726FE4299CF92D006FABB2 /* CharacterNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72726FE3299CF92D006FABB2 /* CharacterNetworkClient.swift */; };
+		72726FE6299CF94A006FABB2 /* CharacterRDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72726FE5299CF94A006FABB2 /* CharacterRDataClient.swift */; };
 		72E7A886297E85F300D732F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7A885297E85F300D732F5 /* AppDelegate.swift */; };
 		72E7A888297E85F300D732F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7A887297E85F300D732F5 /* SceneDelegate.swift */; };
 		72E7A88F297E85F400D732F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72E7A88E297E85F400D732F5 /* Assets.xcassets */; };
@@ -66,6 +68,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		72726FE3299CF92D006FABB2 /* CharacterNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterNetworkClient.swift; sourceTree = "<group>"; };
+		72726FE5299CF94A006FABB2 /* CharacterRDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRDataClient.swift; sourceTree = "<group>"; };
 		72E7A882297E85F300D732F5 /* RickyAndMortyFan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickyAndMortyFan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72E7A885297E85F300D732F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72E7A887297E85F300D732F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +140,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		72726FE1299CF8F8006FABB2 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				72726FE3299CF92D006FABB2 /* CharacterNetworkClient.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		72726FE2299CF8FF006FABB2 /* RealmDB */ = {
+			isa = PBXGroup;
+			children = (
+				72E7A8E8297ECA2C00D732F5 /* RealmHelper.swift */,
+				72726FE5299CF94A006FABB2 /* CharacterRDataClient.swift */,
+			);
+			path = RealmDB;
+			sourceTree = "<group>";
+		};
 		72E7A879297E85F300D732F5 = {
 			isa = PBXGroup;
 			children = (
@@ -192,7 +213,6 @@
 		72E7A8B6297E862400D732F5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				72E7A8E8297ECA2C00D732F5 /* RealmHelper.swift */,
 				72E7A8EC297ECE2200D732F5 /* Utils.swift */,
 			);
 			path = Helpers;
@@ -209,9 +229,11 @@
 		72E7A8B8297E863200D732F5 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				72726FE2299CF8FF006FABB2 /* RealmDB */,
+				72726FE1299CF8F8006FABB2 /* Network */,
+				72E7A8BD297E869600D732F5 /* Repository */,
 				72E7A8E6297EC8E800D732F5 /* DB */,
 				72E7A8BC297E868900D732F5 /* DTO */,
-				72E7A8BD297E869600D732F5 /* Repository */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -556,10 +578,12 @@
 				72E7A8CF297E903100D732F5 /* MainProtocols.swift in Sources */,
 				72E7A8D0297E903100D732F5 /* MainBuilder.swift in Sources */,
 				72E7A8E0297EA81B00D732F5 /* CharacterEntity.swift in Sources */,
+				72726FE6299CF94A006FABB2 /* CharacterRDataClient.swift in Sources */,
 				72E7A8DE297E9FB900D732F5 /* CharacterUseCase.swift in Sources */,
 				72E7A8DA297E986100D732F5 /* CharactersDTO.swift in Sources */,
 				72F40445297FB21F00494EA8 /* DetailProtocols.swift in Sources */,
 				72F40447297FB21F00494EA8 /* DetailViewModel.swift in Sources */,
+				72726FE4299CF92D006FABB2 /* CharacterNetworkClient.swift in Sources */,
 				72E7A8D7297E937700D732F5 /* CharacterCell.swift in Sources */,
 				72E7A8ED297ECE2200D732F5 /* Utils.swift in Sources */,
 				72F40444297FB21F00494EA8 /* DetailViewController.swift in Sources */,

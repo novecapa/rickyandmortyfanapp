@@ -17,7 +17,8 @@ final class MainBuilder: MainBuilderProtocol {
 		let vController = storyboard.instantiateViewController(withIdentifier: MainViewController.identifier)
 		if let viewController = vController as? MainViewController {
 			let router = MainRouter(viewController: viewController)
-            let characterRepo = CharacterRepository()
+            let characterRepo = CharacterRepository(characterNetworkClient: CharacterNetworkClient(),
+                                                    characterRDataClient: CharacterRDataClient())
             let characterUseCase = CharacterUseCase(repository: characterRepo)
 			let viewModel = MainViewModel(router: router, characterUseCase: characterUseCase)
 
