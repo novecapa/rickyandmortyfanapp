@@ -18,7 +18,7 @@ enum CharacterUseCaseError: Error{
 protocol CharacterUseCaseProtocol {
     func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool)
     func filterCharacter(name: String, page: Int) async throws -> ([CharacterEntity], Bool)
-    func getCharacterDetail(id: Int) async throws -> (CharacterEntity)
+    func getCharacterDetail(id: Int) async throws -> (CharacterEntity?)
 }
 
 final class CharacterUseCase {
@@ -48,7 +48,7 @@ extension CharacterUseCase: CharacterUseCaseProtocol {
         }
     }
     
-    func getCharacterDetail(id: Int) async throws -> (CharacterEntity) {
+    func getCharacterDetail(id: Int) async throws -> (CharacterEntity?) {
         do {
             let character = try await repository.getCharacterDetail(id: id)
             return character

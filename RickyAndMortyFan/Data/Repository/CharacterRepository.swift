@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CharacterRepositoryError: Error{
+enum CharacterRepositoryError: Error {
     case badURL
     case badResponse
     case decodeError
@@ -18,116 +18,67 @@ enum CharacterRepositoryError: Error{
 protocol CharacterRepositoryProtocol {
     func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool)
     func filterCharacter(name: String, page: Int) async throws ->  ([CharacterEntity], Bool)
-    func getCharacterDetail(id: Int) async throws -> (CharacterEntity)
+    func getCharacterDetail(id: Int) async throws -> (CharacterEntity?)
 }
 
-final class CharacterRepository: CharacterRepositoryProtocol {
+final class CharacterRepository {
+        
+    let characterNetworkClient: CharacterNetworkClientProtocol
+    let characterRDataClient: CharacterRDataClientProtocol
     
-    final let baseURL = "https://rickandmortyapi.com/api/"
+    init(characterNetworkClient: CharacterNetworkClientProtocol,
+         characterRDataClient: CharacterRDataClientProtocol) {
+        self.characterNetworkClient = characterNetworkClient
+        self.characterRDataClient = characterRDataClient
+    }
+}
+
+extension CharacterRepository: CharacterRepositoryProtocol {
     
     func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool) {
         if page == 1 && !Utils.existsConnection() {
-            return (RCharacter.getAllCharacters(), false)
-        }
-        guard let url = URL(string: "\(baseURL)character/?page=\(page)") else {
-            throw CharacterRepositoryError.badURL
-        }
-        let request = URLRequest(url: url)
-        do {
-            let (data, response) = try await URLSession.shared.data(for: request)
-            guard let response = response as? HTTPURLResponse else {
-                throw CharacterRepositoryError.invalidResponse
-            }
-            let decoder = JSONDecoder()
             do {
-                if (200..<300).contains(response.statusCode) {
-                    let result = try decoder.decode(CharactersDTO.self, from: data)
-                    var hasNextPage = false
-                    guard let nextPage = result.info.next else {
-                        hasNextPage = false
-                        return (result.results.map { $0.toEntity }, hasNextPage)
-                    }
-                    hasNextPage = !nextPage.isEmpty ? true : false
-                    let characList = result.results.map { $0.toEntity }
-                    RCharacter.saveCharacters(characters: characList)
-                    return (characList, hasNextPage)
-                } else {
-                    throw CharacterRepositoryError.badResponse
-                }
+                return (try self.characterRDataClient.getCharacterList(), false)
             } catch {
-                throw CharacterRepositoryError.decodeError
+                throw error
             }
+        }
+        do {
+            let list = try await self.characterNetworkClient.getCharacterList(page: page)
+            try self.characterRDataClient.saveCharacters(characters: list.0)
+            return (list)
         } catch {
-            throw CharacterRepositoryError.badRequest
+            throw error
         }
     }
     
     func filterCharacter(name: String, page: Int) async throws -> ([CharacterEntity], Bool) {
         if !Utils.existsConnection() {
-            return (RCharacter.filterCharacter(name: name), false)
-        }
-        guard let url = URL(string: "\(baseURL)character/?page=\(page)&name=\(name)") else {
-            throw CharacterRepositoryError.badURL
-        }
-        let request = URLRequest(url: url)
-        do {
-            let (data, response) = try await URLSession.shared.data(for: request)
-            guard let response = response as? HTTPURLResponse else {
-                throw CharacterRepositoryError.invalidResponse
-            }
-            let decoder = JSONDecoder()
             do {
-                if (200..<300).contains(response.statusCode) {
-                    let result = try decoder.decode(CharactersDTO.self, from: data)
-                    var hasNextPage = false
-                    guard let nextPage = result.info.next else {
-                        hasNextPage = false
-                        return (result.results.map { $0.toEntity }, hasNextPage)
-                    }
-                    hasNextPage = !nextPage.isEmpty ? true : false
-                    return (result.results.map { $0.toEntity }, hasNextPage)
-                } else {
-                    throw CharacterRepositoryError.badResponse
-                }
+                return (try self.characterRDataClient.filterCharacter(name: name), false)
             } catch {
-                throw CharacterRepositoryError.decodeError
+                throw error
             }
+        }
+        do {
+            return (try await self.characterNetworkClient.filterCharacter(name: name, page: page))
         } catch {
-            throw CharacterRepositoryError.badRequest
+            throw error
         }
     }
     
-    func getCharacterDetail(id: Int) async throws -> (CharacterEntity) {
+    func getCharacterDetail(id: Int) async throws -> (CharacterEntity?) {
         if !Utils.existsConnection() {
-            return RCharacter.getCharacterDetail(id: id) ?? CharacterEntity(id: -1,
-                                                                            name: "Unknow",
-                                                                            status: "Unknow",
-                                                                            image: "Unknow",
-                                                                            location: "Unknow",
-                                                                            episode: [""])
-        }
-        guard let url = URL(string: "\(baseURL)character/\(id)") else {
-            throw CharacterRepositoryError.badURL
-        }
-        let request = URLRequest(url: url)
-        do {
-            let (data, response) = try await URLSession.shared.data(for: request)
-            guard let response = response as? HTTPURLResponse else {
-                throw CharacterRepositoryError.invalidResponse
-            }
-            let decoder = JSONDecoder()
             do {
-                if (200..<300).contains(response.statusCode) {
-                    let result = try decoder.decode(CharacterDTO.self, from: data)
-                    return result.toEntity
-                } else {
-                    throw CharacterRepositoryError.badResponse
-                }
+                return try self.characterRDataClient.getCharacterDetail(id: id)
             } catch {
-                throw CharacterRepositoryError.decodeError
+                throw error
             }
+        }
+        do {
+            return try await self.characterNetworkClient.getCharacterDetail(id: id)
         } catch {
-            throw CharacterRepositoryError.badRequest
+            throw error
         }
     }
 }
