@@ -17,7 +17,8 @@ final class DetailBuilder: DetailBuilderProtocol {
 		let vController = storyboard.instantiateViewController(withIdentifier: DetailViewController.identifier)
 		if let viewController = vController as? DetailViewController {
 			let router = DetailRouter(viewController: viewController)
-            let characterRepo = CharacterRepository()
+            let characterRepo = CharacterRepository(characterNetworkClient: CharacterNetworkClient(),
+                                                    characterRDataClient: CharacterRDataClient())
             let characterUseCase = CharacterUseCase(repository: characterRepo)
             let viewModel = DetailViewModel(router: router,
                                             characterUseCase: characterUseCase,
