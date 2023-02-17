@@ -31,8 +31,9 @@ final class MainViewController: UIViewController {
         didSet {
             collectionCharacters.delegate = self
             collectionCharacters.dataSource = self
-            collectionCharacters.register(UINib(nibName: CharacterCell.identifier, bundle: nil),
-                                           forCellWithReuseIdentifier: CharacterCell.identifier)
+            collectionCharacters.register(UINib(nibName: CharacterCell.identifier,
+                                                bundle: nil),
+                                          forCellWithReuseIdentifier: CharacterCell.identifier)
             collectionCharacters.layer.cornerRadius = 2.0
             collectionCharacters.layer.masksToBounds = true
         }
