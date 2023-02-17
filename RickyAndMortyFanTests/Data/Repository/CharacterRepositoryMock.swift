@@ -9,7 +9,7 @@ import XCTest
 @testable import RickyAndMortyFan
 
 final class CharacterRepositoryMock: CharacterRepositoryProtocol {
-    
+
     func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool) {
         return (CharacterEntityMock.getListMock(), false)
     }
@@ -25,5 +25,9 @@ final class CharacterRepositoryMock: CharacterRepositoryProtocol {
                                                                           image: "Unknow",
                                                                           location: "Unknow",
                                                                           episode: [""])
+    }
+    
+    func getCharacterDetail(id: Int) async throws -> (CharacterEntity?) {
+        return CharacterEntityMock.getListMock().first
     }
 }
