@@ -21,7 +21,6 @@ final class MainViewController: UIViewController {
             searchBar.tintColor = .white
         }
     }
-
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
         didSet {
             activityIndicator.isHidden = true
@@ -38,8 +37,8 @@ final class MainViewController: UIViewController {
             collectionCharacters.layer.masksToBounds = true
         }
     }
+    
 	// MARK: LifeCycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
@@ -78,6 +77,7 @@ final class MainViewController: UIViewController {
         }
     }
 }
+
 // MARK: Collection Delegates
 extension MainViewController: UICollectionViewDelegate,
                               UICollectionViewDataSource,
@@ -122,7 +122,6 @@ extension MainViewController: UICollectionViewDelegate,
             viewModel.fetchCharacters()
         }
     }
-    
 }
 
 // MARK: Search bar delegates

@@ -31,7 +31,6 @@ final class DetailViewModel {
 extension DetailViewModel: DetailViewModelProtocol {
 
     func viewReady() {
-        // Called when view is loaded and ready
         Task {
             character = try await characterUseCase.getCharacterDetail(id: self.characterId)
             self.refresh?()

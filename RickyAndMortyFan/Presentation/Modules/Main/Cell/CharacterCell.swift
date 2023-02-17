@@ -24,7 +24,6 @@ class CharacterCell: UICollectionViewCell {
             viewCustomBackground.layer.masksToBounds = false
         }
     }
-    
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var imageAvatar: UIImageView! {
         didSet {
