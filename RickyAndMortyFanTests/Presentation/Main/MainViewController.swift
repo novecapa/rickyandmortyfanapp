@@ -76,6 +76,8 @@ class MainViewControllerTests: XCTestCase {
         XCTAssertNotNil(viewController)
         model.charactersList = CharacterEntityMock.getListMock()
         XCTAssertFalse(model.charactersList.isEmpty)
-        _ = viewController.collectionView(viewController.collectionCharacters, cellForItemAt: IndexPath(item: 0, section: 0))
+        let indexPath = IndexPath(item: 0, section: 0)
+        _ = viewController.collectionView(viewController.collectionCharacters,
+                                          cellForItemAt: indexPath)
     }
 }

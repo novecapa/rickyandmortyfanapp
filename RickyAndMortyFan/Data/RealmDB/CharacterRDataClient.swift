@@ -8,14 +8,6 @@
 import Foundation
 import RealmSwift
 
-enum CharacterRDataClientError: Error {
-    case badURL
-    case badResponse
-    case decodeError
-    case badRequest
-    case invalidResponse
-}
-
 protocol CharacterRDataClientProtocol {
     func saveCharacters(characters: [CharacterEntity]) throws
     func getCharacterList() throws -> ([CharacterEntity])

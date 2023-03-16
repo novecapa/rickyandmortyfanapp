@@ -33,6 +33,7 @@
 		72E7A8EB297ECADD00D732F5 /* RCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7A8EA297ECADD00D732F5 /* RCharacter.swift */; };
 		72E7A8ED297ECE2200D732F5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7A8EC297ECE2200D732F5 /* Utils.swift */; };
 		72E7A8F7297ED93700D732F5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 72E7A8F6297ED93700D732F5 /* SDWebImage */; };
+		72F21FBB29C33B08004A943C /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F21FBA29C33B08004A943C /* NetworkError.swift */; };
 		72F40428297FA49200494EA8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F40427297FA49200494EA8 /* MainViewController.swift */; };
 		72F4042B297FA53B00494EA8 /* CharacterRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F4042A297FA53B00494EA8 /* CharacterRepositoryMock.swift */; };
 		72F40430297FA93B00494EA8 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 72F4042F297FA93B00494EA8 /* Realm */; };
@@ -96,6 +97,7 @@
 		72E7A8E8297ECA2C00D732F5 /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		72E7A8EA297ECADD00D732F5 /* RCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCharacter.swift; sourceTree = "<group>"; };
 		72E7A8EC297ECE2200D732F5 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		72F21FBA29C33B08004A943C /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		72F40427297FA49200494EA8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		72F4042A297FA53B00494EA8 /* CharacterRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRepositoryMock.swift; sourceTree = "<group>"; };
 		72F40437297FAAB400494EA8 /* CharacterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterMock.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				72726FE3299CF92D006FABB2 /* CharacterNetworkClient.swift */,
+				72F21FBA29C33B08004A943C /* NetworkError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				72E7A8DE297E9FB900D732F5 /* CharacterUseCase.swift in Sources */,
 				72E7A8DA297E986100D732F5 /* CharactersDTO.swift in Sources */,
 				72F40445297FB21F00494EA8 /* DetailProtocols.swift in Sources */,
+				72F21FBB29C33B08004A943C /* NetworkError.swift in Sources */,
 				72F40447297FB21F00494EA8 /* DetailViewModel.swift in Sources */,
 				72726FE4299CF92D006FABB2 /* CharacterNetworkClient.swift in Sources */,
 				72E7A8D7297E937700D732F5 /* CharacterCell.swift in Sources */,

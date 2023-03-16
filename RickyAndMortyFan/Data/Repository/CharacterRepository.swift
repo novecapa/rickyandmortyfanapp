@@ -7,14 +7,6 @@
 
 import Foundation
 
-enum CharacterRepositoryError: Error {
-    case badURL
-    case badResponse
-    case decodeError
-    case badRequest
-    case invalidResponse
-}
-
 protocol CharacterRepositoryProtocol {
     func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool)
     func filterCharacter(name: String, page: Int) async throws ->  ([CharacterEntity], Bool)

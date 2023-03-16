@@ -7,14 +7,6 @@
 
 import Foundation
 
-enum CharacterNetworkClientError: Error {
-    case badURL
-    case badResponse
-    case decodeError
-    case badRequest
-    case invalidResponse
-}
-
 protocol CharacterNetworkClientProtocol {
     func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool)
     func filterCharacter(name: String, page: Int) async throws ->  ([CharacterEntity], Bool)
@@ -27,13 +19,13 @@ final class CharacterNetworkClient: CharacterNetworkClientProtocol {
     
     func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool) {
         guard let url = URL(string: "\(baseURL)character/?page=\(page)") else {
-            throw CharacterRepositoryError.badURL
+            throw NetworkError.badURL
         }
         let request = URLRequest(url: url)
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let response = response as? HTTPURLResponse else {
-                throw CharacterRepositoryError.invalidResponse
+                throw NetworkError.invalidResponse
             }
             let decoder = JSONDecoder()
             do {
@@ -48,25 +40,25 @@ final class CharacterNetworkClient: CharacterNetworkClientProtocol {
                     let characList = result.results.map { $0.toEntity }
                     return (characList, hasNextPage)
                 } else {
-                    throw CharacterRepositoryError.badResponse
+                    throw NetworkError.badResponse
                 }
             } catch {
-                throw CharacterRepositoryError.decodeError
+                throw NetworkError.decodeError
             }
         } catch {
-            throw CharacterRepositoryError.badRequest
+            throw NetworkError.badRequest
         }
     }
     
     func filterCharacter(name: String, page: Int) async throws -> ([CharacterEntity], Bool) {
         guard let url = URL(string: "\(baseURL)character/?page=\(page)&name=\(name)") else {
-            throw CharacterRepositoryError.badURL
+            throw NetworkError.badURL
         }
         let request = URLRequest(url: url)
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let response = response as? HTTPURLResponse else {
-                throw CharacterRepositoryError.invalidResponse
+                throw NetworkError.invalidResponse
             }
             let decoder = JSONDecoder()
             do {
@@ -80,25 +72,25 @@ final class CharacterNetworkClient: CharacterNetworkClientProtocol {
                     hasNextPage = !nextPage.isEmpty ? true : false
                     return (result.results.map { $0.toEntity }, hasNextPage)
                 } else {
-                    throw CharacterRepositoryError.badResponse
+                    throw NetworkError.badResponse
                 }
             } catch {
-                throw CharacterRepositoryError.decodeError
+                throw NetworkError.decodeError
             }
         } catch {
-            throw CharacterRepositoryError.badRequest
+            throw NetworkError.badRequest
         }
     }
     
     func getCharacterDetail(id: Int) async throws -> (CharacterEntity) {
         guard let url = URL(string: "\(baseURL)character/\(id)") else {
-            throw CharacterRepositoryError.badURL
+            throw NetworkError.badURL
         }
         let request = URLRequest(url: url)
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let response = response as? HTTPURLResponse else {
-                throw CharacterRepositoryError.invalidResponse
+                throw NetworkError.invalidResponse
             }
             let decoder = JSONDecoder()
             do {
@@ -106,13 +98,13 @@ final class CharacterNetworkClient: CharacterNetworkClientProtocol {
                     let result = try decoder.decode(CharacterDTO.self, from: data)
                     return result.toEntity
                 } else {
-                    throw CharacterRepositoryError.badResponse
+                    throw NetworkError.badResponse
                 }
             } catch {
-                throw CharacterRepositoryError.decodeError
+                throw NetworkError.decodeError
             }
         } catch {
-            throw CharacterRepositoryError.badRequest
+            throw NetworkError.badRequest
         }
     }
 }

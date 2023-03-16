@@ -7,14 +7,6 @@
 
 import Foundation
 
-enum CharacterUseCaseError: Error{
-    case badURL
-    case badResponse
-    case decodeError
-    case badRequest
-    case invalidResponse
-}
-
 protocol CharacterUseCaseProtocol {
     func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool)
     func filterCharacter(name: String, page: Int) async throws -> ([CharacterEntity], Bool)
