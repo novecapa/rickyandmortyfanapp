@@ -12,7 +12,7 @@ final class MainViewModel {
 
 	private let router: MainRouterProtocol
     private let characterUseCase: CharacterUseCaseProtocol
-    
+
     private var currentPage = 1
     private var hasNewPage = true
     var charactersList: [CharacterEntity] = []
@@ -20,9 +20,8 @@ final class MainViewModel {
     var startActivityIndicator: (() -> Void)?
     var stopActivityIndicator: (() -> Void)?
     var scrollToTop: (() -> Void)?
-    
-	required init(router: MainRouterProtocol,
-                  characterUseCase: CharacterUseCaseProtocol) {
+
+	required init(router: MainRouterProtocol, characterUseCase: CharacterUseCaseProtocol) {
 		self.router = router
         self.characterUseCase = characterUseCase
 	}
@@ -35,7 +34,7 @@ extension MainViewModel: MainViewModelProtocol {
     }
 
     func viewDidAppear() { }
-    
+
     func fetchCharacters() {
         Task {
             if !hasNewPage {
@@ -59,12 +58,12 @@ extension MainViewModel: MainViewModelProtocol {
             self.refreshList?()
         }
     }
-    
+
     func resetPagination() {
         currentPage = 1
         hasNewPage = true
     }
-    
+
     func filterCharacters(name: String) {
         Task {
             if !hasNewPage {
@@ -88,11 +87,11 @@ extension MainViewModel: MainViewModelProtocol {
             self.refreshList?()
         }
     }
-    
+
     func getCharacterList() -> [CharacterEntity] {
         return charactersList
     }
-    
+
     func showCharacterDetail(characterId: Int) {
         let detailViewController = Container.shared.detailBuilder().build(characterId: characterId)
         router.showDetail(viewController: detailViewController)

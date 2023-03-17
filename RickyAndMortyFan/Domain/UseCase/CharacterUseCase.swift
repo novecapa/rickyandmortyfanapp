@@ -21,7 +21,7 @@ final class CharacterUseCase {
 }
 
 extension CharacterUseCase: CharacterUseCaseProtocol {
-    
+
     func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool) {
         do {
             let list = try await repository.getCharacterList(page: page)
@@ -30,7 +30,7 @@ extension CharacterUseCase: CharacterUseCaseProtocol {
             throw error
         }
     }
-    
+
     func filterCharacter(name: String, page: Int) async throws -> ([CharacterEntity], Bool) {
         do {
             let list = try await repository.filterCharacter(name: name, page: page)
@@ -39,7 +39,7 @@ extension CharacterUseCase: CharacterUseCaseProtocol {
             throw error
         }
     }
-    
+
     func getCharacterDetail(id: Int) async throws -> (CharacterEntity?) {
         do {
             let character = try await repository.getCharacterDetail(id: id)

@@ -11,8 +11,7 @@ import SDWebImage
 class CharacterCell: UICollectionViewCell {
 
     static let identifier = "CharacterCell"
-    
-    
+
     @IBOutlet weak var viewCustomBackground: UIView! {
         didSet {
             viewCustomBackground.layer.cornerRadius = 6.0
@@ -40,7 +39,7 @@ class CharacterCell: UICollectionViewCell {
                                              .layerMinXMaxYCorner]
         }
     }
-    
+
     var cellData: CharacterEntity? {
         didSet {
             labelName.text = "\(cellData?.name ?? "") \(cellData?.isAlive ?? "🫤")"

@@ -12,7 +12,7 @@ import UIKit
 final class MainBuilder: MainBuilderProtocol {
 
 	func build() -> MainViewController {
-        let storyboard = UIStoryboard(name: MainViewController.identifier, 
+        let storyboard = UIStoryboard(name: MainViewController.identifier,
 									  bundle: Bundle.main)
 		let vController = storyboard.instantiateViewController(withIdentifier: MainViewController.identifier)
 		if let viewController = vController as? MainViewController {

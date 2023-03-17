@@ -12,7 +12,7 @@ import UIKit
 final class DetailBuilder: DetailBuilderProtocol {
 
     func build(characterId: Int) -> DetailViewController {
-        let storyboard = UIStoryboard(name: DetailViewController.identifier, 
+        let storyboard = UIStoryboard(name: DetailViewController.identifier,
 									  bundle: Bundle.main)
 		let vController = storyboard.instantiateViewController(withIdentifier: DetailViewController.identifier)
 		if let viewController = vController as? DetailViewController {

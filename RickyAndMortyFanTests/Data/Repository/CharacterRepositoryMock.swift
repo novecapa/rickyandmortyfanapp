@@ -14,10 +14,10 @@ final class CharacterRepositoryMock: CharacterRepositoryProtocol {
         return (CharacterEntityMock.getListMock(), false)
     }
     func filterCharacter(name: String,
-                         page: Int) async throws ->  ([CharacterEntity], Bool) {
+                         page: Int) async throws -> ([CharacterEntity], Bool) {
         return (CharacterEntityMock.getListMock(), false)
     }
-    
+
     func getCharacterDetail(id: Int) async throws -> (CharacterEntity) {
         return CharacterEntityMock.getListMock().first ?? CharacterEntity(id: -1,
                                                                           name: "Unknow",
@@ -26,7 +26,7 @@ final class CharacterRepositoryMock: CharacterRepositoryProtocol {
                                                                           location: "Unknow",
                                                                           episode: [""])
     }
-    
+
     func getCharacterDetail(id: Int) async throws -> (CharacterEntity?) {
         return CharacterEntityMock.getListMock().first
     }

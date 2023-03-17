@@ -14,7 +14,7 @@ final class DetailViewController: UIViewController {
     static let identifier = "DetailViewController"
 
 	var viewModel: DetailViewModelProtocol!
-    
+
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
         didSet {
             activityIndicator.isHidden = true
@@ -29,8 +29,7 @@ final class DetailViewController: UIViewController {
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelLocation: UILabel!
     @IBOutlet weak var labelEpisodes: UILabel!
-    
-    
+
     // MARK: LifeCycle
 
     override func viewDidLoad() {

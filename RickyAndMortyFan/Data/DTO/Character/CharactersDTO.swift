@@ -45,4 +45,3 @@ extension CharacterDTO {
                                episode: self.episode.map { $0 })
     }
 }
-

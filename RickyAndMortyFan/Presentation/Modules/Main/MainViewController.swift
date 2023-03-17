@@ -37,7 +37,7 @@ final class MainViewController: UIViewController {
             collectionCharacters.layer.masksToBounds = true
         }
     }
-    
+
 	// MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +69,7 @@ final class MainViewController: UIViewController {
         }
         viewModel.scrollToTop = { [weak self] in
             DispatchQueue.main.async {
-                if (self?.viewModel.getCharacterList().count ?? 0 > 0) {
+                if self?.viewModel.getCharacterList().count ?? 0 > 0 {
                     self?.collectionCharacters.setContentOffset(CGPoint.zero,
                                                                 animated: true)
                 }
@@ -82,7 +82,7 @@ final class MainViewController: UIViewController {
 extension MainViewController: UICollectionViewDelegate,
                               UICollectionViewDataSource,
                               UICollectionViewDelegateFlowLayout {
-    
+
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         return viewModel.getCharacterList().count
@@ -114,7 +114,7 @@ extension MainViewController: UICollectionViewDelegate,
         let item = viewModel.getCharacterList()[indexPath.row]
         viewModel.showCharacterDetail(characterId: item.id)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView,
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
@@ -137,14 +137,14 @@ extension MainViewController: UISearchResultsUpdating, UISearchBarDelegate {
         viewModel.resetPagination()
         viewModel.fetchCharacters()
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             viewModel.resetPagination()
             viewModel.fetchCharacters()
         }
     }
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchStringAction()

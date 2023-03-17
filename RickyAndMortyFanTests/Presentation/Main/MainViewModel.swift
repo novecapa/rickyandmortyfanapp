@@ -9,14 +9,14 @@ import XCTest
 @testable import RickyAndMortyFan
 
 class MainViewModelTests: XCTestCase {
-    
+
     let nameTest: String = "morty"
     let pageTest: Int = 1
     var model: MainViewModel!
     var router: MainRouter!
     var repo: CharacterRepositoryMock!
     var useCase: CharacterUseCaseProtocol!
-        
+
     override func setUp() {
         router = MainRouter(viewController: nil)
         let characterRepo = CharacterRepositoryMock()
@@ -24,14 +24,14 @@ class MainViewModelTests: XCTestCase {
         model = MainViewModel(router: router,
                               characterUseCase: useCase)
     }
-    
+
     override func tearDown() {
         model = nil
         router = nil
         repo = nil
         useCase = nil
     }
-    
+
     func testViewModelIsNotNil() {
         XCTAssertNotNil(model)
     }
@@ -47,7 +47,7 @@ class MainViewModelTests: XCTestCase {
         XCTAssertNotNil(model.resetPagination)
         model.resetPagination()
     }
-    
+
     func testFetchCharacters() {
         Task {
             let repoC = CharacterRepositoryMock()
@@ -56,7 +56,7 @@ class MainViewModelTests: XCTestCase {
             XCTAssertFalse(characterList.0.isEmpty)
         }
     }
-    
+
     func testFilterCharacters() {
         Task {
             let repoC = CharacterRepositoryMock()

@@ -9,14 +9,14 @@ import Foundation
 
 protocol CharacterNetworkClientProtocol {
     func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool)
-    func filterCharacter(name: String, page: Int) async throws ->  ([CharacterEntity], Bool)
+    func filterCharacter(name: String, page: Int) async throws -> ([CharacterEntity], Bool)
     func getCharacterDetail(id: Int) async throws -> (CharacterEntity)
 }
 
 final class CharacterNetworkClient: CharacterNetworkClientProtocol {
-    
+
     final let baseURL = "https://rickandmortyapi.com/api/"
-    
+
     func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool) {
         guard let url = URL(string: "\(baseURL)character/?page=\(page)") else {
             throw NetworkError.badURL
@@ -49,7 +49,7 @@ final class CharacterNetworkClient: CharacterNetworkClientProtocol {
             throw NetworkError.badRequest
         }
     }
-    
+
     func filterCharacter(name: String, page: Int) async throws -> ([CharacterEntity], Bool) {
         guard let url = URL(string: "\(baseURL)character/?page=\(page)&name=\(name)") else {
             throw NetworkError.badURL
@@ -81,7 +81,7 @@ final class CharacterNetworkClient: CharacterNetworkClientProtocol {
             throw NetworkError.badRequest
         }
     }
-    
+
     func getCharacterDetail(id: Int) async throws -> (CharacterEntity) {
         guard let url = URL(string: "\(baseURL)character/\(id)") else {
             throw NetworkError.badURL

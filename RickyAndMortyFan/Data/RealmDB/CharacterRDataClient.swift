@@ -16,11 +16,11 @@ protocol CharacterRDataClientProtocol {
 }
 
 final class CharacterRDataClient: CharacterRDataClientProtocol {
-    
+
     func saveCharacters(characters: [CharacterEntity]) throws {
         do {
             let realm = try Realm()
-            var newCharacters:[RCharacter] = []
+            var newCharacters: [RCharacter] = []
             characters.forEach { cha in
                 newCharacters.append(RCharacter(id: cha.id,
                                                 name: cha.name,
@@ -36,10 +36,10 @@ final class CharacterRDataClient: CharacterRDataClientProtocol {
             throw error
         }
     }
-    
+
     func getCharacterList() throws -> ([CharacterEntity]) {
         do {
-            var characters:[CharacterEntity] = []
+            var characters: [CharacterEntity] = []
             let realm = try Realm()
             let rcharacters = Array(realm.objects(RCharacter.self))
             rcharacters.forEach { rchar in
@@ -50,10 +50,10 @@ final class CharacterRDataClient: CharacterRDataClientProtocol {
             throw error
         }
     }
-    
+
     func filterCharacter(name: String) throws -> ([CharacterEntity]) {
         do {
-            var characters:[CharacterEntity] = []
+            var characters: [CharacterEntity] = []
             let realm = try Realm()
             let rcharacters = Array(realm.objects(RCharacter.self).filter("name LIKE[c] '*\(name)*'"))
             rcharacters.forEach { rchar in
@@ -64,7 +64,7 @@ final class CharacterRDataClient: CharacterRDataClientProtocol {
             throw error
         }
     }
-    
+
     func getCharacterDetail(id: Int) throws -> (CharacterEntity?) {
         do {
             let realm = try Realm()

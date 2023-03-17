@@ -9,15 +9,15 @@ import Foundation
 
 protocol CharacterRepositoryProtocol {
     func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool)
-    func filterCharacter(name: String, page: Int) async throws ->  ([CharacterEntity], Bool)
+    func filterCharacter(name: String, page: Int) async throws -> ([CharacterEntity], Bool)
     func getCharacterDetail(id: Int) async throws -> (CharacterEntity?)
 }
 
 final class CharacterRepository {
-        
+
     let characterNetworkClient: CharacterNetworkClientProtocol
     let characterRDataClient: CharacterRDataClientProtocol
-    
+
     init(characterNetworkClient: CharacterNetworkClientProtocol,
          characterRDataClient: CharacterRDataClientProtocol) {
         self.characterNetworkClient = characterNetworkClient
@@ -26,7 +26,7 @@ final class CharacterRepository {
 }
 
 extension CharacterRepository: CharacterRepositoryProtocol {
-    
+
     func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool) {
         if page == 1 && !Utils.existsConnection() {
             do {
@@ -43,7 +43,7 @@ extension CharacterRepository: CharacterRepositoryProtocol {
             throw error
         }
     }
-    
+
     func filterCharacter(name: String, page: Int) async throws -> ([CharacterEntity], Bool) {
         if !Utils.existsConnection() {
             do {
@@ -58,7 +58,7 @@ extension CharacterRepository: CharacterRepositoryProtocol {
             throw error
         }
     }
-    
+
     func getCharacterDetail(id: Int) async throws -> (CharacterEntity?) {
         if !Utils.existsConnection() {
             do {

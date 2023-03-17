@@ -9,14 +9,14 @@ import Foundation
 import RealmSwift
 
 class RCharacter: Object {
-    
-    @objc dynamic var id: Int = -1
-    @objc dynamic var name: String = ""
-    @objc dynamic var status: String = ""
-    @objc dynamic var image: String = ""
-    @objc dynamic var location: String = ""
+
+    @Persisted var id: Int = -1
+    @Persisted var name: String = ""
+    @Persisted var status: String = ""
+    @Persisted var image: String = ""
+    @Persisted var location: String = ""
     var episode = List<String>()
-    
+
     convenience init(id: Int,
                      name: String,
                      status: String,
@@ -31,7 +31,7 @@ class RCharacter: Object {
         self.location = location
         self.episode.append(objectsIn: episode)
     }
-    
+
     public override static func primaryKey() -> String {
         return "id"
     }

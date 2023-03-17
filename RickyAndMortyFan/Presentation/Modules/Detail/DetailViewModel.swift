@@ -13,15 +13,13 @@ final class DetailViewModel {
 	private let router: DetailRouterProtocol
     private let characterUseCase: CharacterUseCaseProtocol
     private let characterId: Int
-    
+
     var character: CharacterEntity?
     var refresh: (() -> Void)?
     var startActivityIndicator: (() -> Void)?
     var stopActivityIndicator: (() -> Void)?
 
-	required init(router: DetailRouterProtocol,
-                  characterUseCase: CharacterUseCaseProtocol,
-                  characterId: Int) {
+	required init(router: DetailRouterProtocol, characterUseCase: CharacterUseCaseProtocol, characterId: Int) {
 		self.router = router
         self.characterUseCase = characterUseCase
         self.characterId = characterId
@@ -38,7 +36,7 @@ extension DetailViewModel: DetailViewModelProtocol {
     }
 
     func viewDidAppear() { }
-    
+
     func getCharacter() -> CharacterEntity? {
         return character
     }

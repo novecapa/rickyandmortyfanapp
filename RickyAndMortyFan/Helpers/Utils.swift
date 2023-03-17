@@ -16,7 +16,7 @@ class Utils {
                                              in: .userDomainMask)
         return paths[0]
     }
-    
+
     // MARK: - Check Internet connection
     static func existsConnection() -> Bool {
         if Reachability.isConnectedToNetwork() {

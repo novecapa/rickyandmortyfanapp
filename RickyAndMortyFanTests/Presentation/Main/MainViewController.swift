@@ -9,14 +9,14 @@ import XCTest
 @testable import RickyAndMortyFan
 
 class MainViewControllerTests: XCTestCase {
-    
+
     let test: String = "test"
     var viewController: MainViewController!
     var model: MainViewModel!
     var router: MainRouter!
     var repo: CharacterRepositoryMock!
     var useCase: CharacterUseCaseProtocol!
-        
+
     override func setUp() {
         viewController = Container.shared.mainBuilder().build()
         router = MainRouter(viewController: viewController)
@@ -26,7 +26,7 @@ class MainViewControllerTests: XCTestCase {
         viewController.viewModel = model
         viewController.loadViewIfNeeded()
     }
-    
+
     override func tearDown() {
         viewController = nil
         model = nil
@@ -49,28 +49,28 @@ class MainViewControllerTests: XCTestCase {
         XCTAssertNotNil(viewController.viewModel.refreshList)
         viewController.viewModel.refreshList?()
     }
-    
+
     func testStartActivity() {
         XCTAssertNotNil(viewController.viewModel.startActivityIndicator)
         viewController.loadViewIfNeeded()
         _ = viewController.view
         viewController.viewModel.startActivityIndicator?()
     }
-    
+
     func testStopActivity() {
         XCTAssertNotNil(viewController.viewModel.stopActivityIndicator)
         viewController.loadViewIfNeeded()
         _ = viewController.view
         viewController.viewModel.stopActivityIndicator?()
     }
-    
+
     func testScrollToTop() {
         XCTAssertNotNil(viewController.viewModel.scrollToTop)
         viewController.loadViewIfNeeded()
         _ = viewController.view
         viewController.viewModel.scrollToTop?()
     }
-    
+
     // MARK: - Collection View
     func testCellForRow() {
         XCTAssertNotNil(viewController)
