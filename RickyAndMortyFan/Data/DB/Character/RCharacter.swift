@@ -15,7 +15,7 @@ class RCharacter: Object {
     @Persisted var status: String = ""
     @Persisted var image: String = ""
     @Persisted var location: String = ""
-    var episode = List<String>()
+    @Persisted var episode = List<String>()
 
     convenience init(id: Int,
                      name: String,
