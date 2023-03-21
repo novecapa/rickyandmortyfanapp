@@ -80,4 +80,13 @@ class MainViewControllerTests: XCTestCase {
         _ = viewController.collectionView(viewController.collectionCharacters,
                                           cellForItemAt: indexPath)
     }
+
+    func testDidSelectItemAt() {
+        XCTAssertNotNil(viewController)
+        model.charactersList = CharacterEntityMock.getListMock()
+        XCTAssertFalse(model.charactersList.isEmpty)
+        let indexPath = IndexPath(item: 0, section: 0)
+        viewController.collectionView(viewController.collectionCharacters,
+                                      didSelectItemAt: indexPath)
+    }
 }

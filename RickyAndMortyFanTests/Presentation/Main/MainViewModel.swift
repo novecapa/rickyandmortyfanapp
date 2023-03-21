@@ -57,6 +57,11 @@ class MainViewModelTests: XCTestCase {
         }
     }
 
+    func testFilterCharactersName() {
+        XCTAssertNotNil(model.filterCharacters(name: nameTest))
+        model.filterCharacters(name: nameTest)
+    }
+
     func testFilterCharacters() {
         Task {
             let repoC = CharacterRepositoryMock()
