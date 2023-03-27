@@ -29,6 +29,7 @@ final class MainViewModel {
 
 extension MainViewModel: MainViewModelProtocol {
 
+    // MARK: Lifecycle
     func viewReady() {
         fetchCharacters()
     }
