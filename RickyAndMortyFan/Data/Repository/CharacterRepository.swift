@@ -29,7 +29,7 @@ extension CharacterRepository: CharacterRepositoryProtocol {
 
     func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool) {
         do {
-            if page == 1 && !Utils.existsConnection() {
+            if page == 1 && !Utils.hasInternetConnection {
                 return (try self.characterRDataClient.getCharacterList().map { $0.toEntity }, false)
             }
             let result = try await self.characterNetworkClient.getCharacterList(page: page)
@@ -46,7 +46,7 @@ extension CharacterRepository: CharacterRepositoryProtocol {
 
     func filterCharacter(name: String, page: Int) async throws -> ([CharacterEntity], Bool) {
         do {
-            if !Utils.existsConnection() {
+            if !Utils.hasInternetConnection {
                 return (try self.characterRDataClient.filterCharacter(name: name).map { $0.toEntity }, false)
             }
             let result = try await self.characterNetworkClient.filterCharacter(name: name, page: page)
@@ -59,10 +59,9 @@ extension CharacterRepository: CharacterRepositoryProtocol {
 
     func getCharacterDetail(id: Int) async throws -> (CharacterEntity?) {
         do {
-            if !Utils.existsConnection() {
-                return try self.characterRDataClient.getCharacterDetail(id: id)?.toEntity
-            }
-            return try await self.characterNetworkClient.getCharacterDetail(id: id).toEntity
+            return !Utils.hasInternetConnection
+            ? try self.characterRDataClient.getCharacterDetail(id: id)?.toEntity
+            : try await self.characterNetworkClient.getCharacterDetail(id: id).toEntity
         } catch {
             throw error
         }

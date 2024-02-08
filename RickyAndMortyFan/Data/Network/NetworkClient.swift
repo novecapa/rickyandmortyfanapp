@@ -8,8 +8,7 @@
 import Foundation
 
 class NetworkClient {
-    func load<T: Decodable>(urlString: String,
-                            of type: T.Type) async throws -> T {
+    func load<T: Decodable>(urlString: String, of type: T.Type) async throws -> T {
         guard let url = URL(string: urlString) else {
             throw NetworkError.badURL
         }

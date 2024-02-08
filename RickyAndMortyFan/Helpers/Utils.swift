@@ -17,7 +17,7 @@ class Utils {
     }
 
     // MARK: - Check Internet connection
-    static func existsConnection() -> Bool {
+    static var hasInternetConnection: Bool {
         Reachability.isConnectedToNetwork()
     }
 }
