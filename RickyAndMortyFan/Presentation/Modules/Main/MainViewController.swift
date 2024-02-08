@@ -12,6 +12,14 @@ final class MainViewController: UIViewController {
 
     static let identifier = "MainViewController"
 
+    enum Constants {
+        // Collection View
+        static let cornerRadius: CGFloat = 2.0
+        static let spaicing: CGFloat = 2.0
+        static let padding: CGFloat = 4.0
+        static let columns: CGFloat = 2
+    }
+
 	var viewModel: MainViewModelProtocol!
 
     @IBOutlet weak var searchBar: UISearchBar! {
@@ -19,6 +27,7 @@ final class MainViewController: UIViewController {
             searchBar.delegate = self
             searchBar.returnKeyType = .search
             searchBar.tintColor = .white
+            searchBar.placeholder = NSLocalizedString("Search by name", comment: "")
         }
     }
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
@@ -33,8 +42,13 @@ final class MainViewController: UIViewController {
             collectionCharacters.register(UINib(nibName: CharacterCell.identifier,
                                                 bundle: nil),
                                           forCellWithReuseIdentifier: CharacterCell.identifier)
-            collectionCharacters.layer.cornerRadius = 2.0
+            collectionCharacters.layer.cornerRadius = Constants.cornerRadius
             collectionCharacters.layer.masksToBounds = true
+            let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .vertical
+            layout.minimumLineSpacing = Constants.spaicing
+            layout.minimumInteritemSpacing = Constants.spaicing
+            collectionCharacters.setCollectionViewLayout(layout, animated: true)
         }
     }
 
@@ -45,9 +59,14 @@ final class MainViewController: UIViewController {
         viewModel.viewReady()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		viewModel.viewDidAppear()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        collectionCharacters.collectionViewLayout.invalidateLayout()
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        collectionCharacters.collectionViewLayout.invalidateLayout()
     }
 
     private func setupBindings() {
@@ -69,9 +88,8 @@ final class MainViewController: UIViewController {
         }
         viewModel.scrollToTop = { [weak self] in
             DispatchQueue.main.async {
-                if self?.viewModel.getCharacterList().count ?? 0 > 0 {
-                    self?.collectionCharacters.setContentOffset(CGPoint.zero,
-                                                                animated: true)
+                if self?.viewModel.characters.count ?? 0 > 0 {
+                    self?.collectionCharacters.setContentOffset(.zero, animated: true)
                 }
             }
         }
@@ -85,7 +103,7 @@ extension MainViewController: UICollectionViewDelegate,
 
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return viewModel.getCharacterList().count
+        return viewModel.characters.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -93,7 +111,7 @@ extension MainViewController: UICollectionViewDelegate,
 
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.identifier,
                                                          for: indexPath) as? CharacterCell {
-            cell.cellData = viewModel.getCharacterList()[indexPath.item]
+            cell.cellData = viewModel.characters[indexPath.item]
             return cell
         } else {
             return UICollectionViewCell()
@@ -104,21 +122,19 @@ extension MainViewController: UICollectionViewDelegate,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let padding: CGFloat = 4
-        let collectionViewSize = (collectionView.frame.size.width - padding)/2
-
+        let collectionViewSize = (collectionView.frame.size.width - Constants.padding)/Constants.columns
         return CGSize(width: collectionViewSize, height: collectionViewSize)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = viewModel.getCharacterList()[indexPath.row]
+        let item = viewModel.characters[indexPath.row]
         viewModel.showCharacterDetail(characterId: item.id)
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
-        if indexPath.item == viewModel.getCharacterList().count - 1 {
+        if indexPath.item == viewModel.characters.count - 1 {
             viewModel.fetchCharacters()
         }
     }
@@ -151,10 +167,7 @@ extension MainViewController: UISearchResultsUpdating, UISearchBarDelegate {
     }
 
     func searchStringAction() {
-        guard let searchString = searchBar.text else { return }
-        if searchString.isEmpty {
-            return
-        }
+        guard let searchString = searchBar.text, !searchString.isEmpty else { return }
         viewModel.resetPagination()
         viewModel.filterCharacters(name: searchString)
     }

@@ -12,18 +12,13 @@ class Utils {
 
     // MARK: - Files and folders
     static func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory,
-                                             in: .userDomainMask)
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
 
     // MARK: - Check Internet connection
     static func existsConnection() -> Bool {
-        if Reachability.isConnectedToNetwork() {
-            return true
-        } else {
-            return false
-        }
+        Reachability.isConnectedToNetwork()
     }
 }
 

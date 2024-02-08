@@ -10,16 +10,15 @@ import Foundation
 
 protocol DetailViewModelProtocol {
     func viewReady()
-    func viewDidAppear()
     // MARK: -
-    func getCharacter() -> CharacterEntity?
+    var character: CharacterEntity? { get }
     // MARK: -
     var refresh: (() -> Void)? { get set }
     var startActivityIndicator: (() -> Void)? { get set }
     var stopActivityIndicator: (() -> Void)? { get set }
 }
 
-protocol DetailRouterProtocol { }
+protocol DetailRouterProtocol {}
 
 protocol DetailBuilderProtocol {
     func build(characterId: Int) -> DetailViewController

@@ -11,12 +11,11 @@ import UIKit
 
 protocol MainViewModelProtocol {
     func viewReady()
-    func viewDidAppear()
     // MARK: -
     func fetchCharacters()
     func filterCharacters(name: String)
     func resetPagination()
-    func getCharacterList() -> [CharacterEntity]
+    var characters: [CharacterEntity] { get set }
     // MARK: -
     var refreshList: (() -> Void)? { get set }
     var startActivityIndicator: (() -> Void)? { get set }

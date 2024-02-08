@@ -17,4 +17,4 @@ final class DetailRouter {
     }
 }
 
-extension DetailRouter: DetailRouterProtocol { }
+extension DetailRouter: DetailRouterProtocol {}

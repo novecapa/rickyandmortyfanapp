@@ -12,21 +12,28 @@ class CharacterCell: UICollectionViewCell {
 
     static let identifier = "CharacterCell"
 
+    private enum Constants {
+        static let cornerRadius: Double = 6.0
+        static let shadowSize = CGSize(width: 0.8, height: 0.8)
+        static let shadowRadius: Double = 2.0
+        static let shadowOpacity: Float = 0.4
+    }
+
     @IBOutlet weak var viewCustomBackground: UIView! {
         didSet {
-            viewCustomBackground.layer.cornerRadius = 6.0
+            viewCustomBackground.layer.cornerRadius = Constants.cornerRadius
             viewCustomBackground.clipsToBounds = true
             viewCustomBackground.layer.shadowColor = UIColor.gray.cgColor
-            viewCustomBackground.layer.shadowOffset = CGSize(width: 0.8, height: 0.8)
-            viewCustomBackground.layer.shadowRadius = 2.0
-            viewCustomBackground.layer.shadowOpacity = 0.4
+            viewCustomBackground.layer.shadowOffset = Constants.shadowSize
+            viewCustomBackground.layer.shadowRadius = Constants.shadowRadius
+            viewCustomBackground.layer.shadowOpacity = Constants.shadowOpacity
             viewCustomBackground.layer.masksToBounds = false
         }
     }
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var imageAvatar: UIImageView! {
         didSet {
-            imageAvatar.layer.cornerRadius = 6.0
+            imageAvatar.layer.cornerRadius = Constants.cornerRadius
             imageAvatar.clipsToBounds = true
             imageAvatar.layer.masksToBounds = false
         }
@@ -34,21 +41,19 @@ class CharacterCell: UICollectionViewCell {
     @IBOutlet weak var viewLabel: UIView! {
         didSet {
             viewLabel.clipsToBounds = true
-            viewLabel.layer.cornerRadius = 6.0
-            viewLabel.layer.maskedCorners = [.layerMaxXMaxYCorner,
-                                             .layerMinXMaxYCorner]
+            viewLabel.layer.cornerRadius = Constants.cornerRadius
+            viewLabel.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         }
     }
 
     var cellData: CharacterEntity? {
         didSet {
-            labelName.text = "\(cellData?.name ?? "") \(cellData?.isAlive ?? "🫤")"
-            imageAvatar.sd_setImage(with: URL(string: cellData?.image ?? ""))
+            guard let cellData else { return }
+            labelName.text = "\(cellData.name) \(cellData.isAlive)"
+            if let imageUrl = URL(string: cellData.image) {
+                imageAvatar.sd_imageTransition = .fade
+                imageAvatar.sd_setImage(with: imageUrl)
+            }
         }
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
     }
 }

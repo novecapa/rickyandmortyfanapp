@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		72726FE4299CF92D006FABB2 /* CharacterNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72726FE3299CF92D006FABB2 /* CharacterNetworkClient.swift */; };
 		72726FE6299CF94A006FABB2 /* CharacterRDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72726FE5299CF94A006FABB2 /* CharacterRDataClient.swift */; };
+		728D83B42B75012300846528 /* Container+Builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728D83B32B75012300846528 /* Container+Builders.swift */; };
+		728D83B62B75150200846528 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728D83B52B75150200846528 /* NetworkClient.swift */; };
 		72E7A886297E85F300D732F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7A885297E85F300D732F5 /* AppDelegate.swift */; };
 		72E7A888297E85F300D732F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7A887297E85F300D732F5 /* SceneDelegate.swift */; };
 		72E7A88F297E85F400D732F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72E7A88E297E85F400D732F5 /* Assets.xcassets */; };
@@ -71,6 +73,8 @@
 /* Begin PBXFileReference section */
 		72726FE3299CF92D006FABB2 /* CharacterNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterNetworkClient.swift; sourceTree = "<group>"; };
 		72726FE5299CF94A006FABB2 /* CharacterRDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRDataClient.swift; sourceTree = "<group>"; };
+		728D83B32B75012300846528 /* Container+Builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Builders.swift"; sourceTree = "<group>"; };
+		728D83B52B75150200846528 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		72E7A882297E85F300D732F5 /* RickyAndMortyFan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickyAndMortyFan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72E7A885297E85F300D732F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72E7A887297E85F300D732F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,19 +149,20 @@
 		72726FE1299CF8F8006FABB2 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				72726FE3299CF92D006FABB2 /* CharacterNetworkClient.swift */,
+				728D83B52B75150200846528 /* NetworkClient.swift */,
 				72F21FBA29C33B08004A943C /* NetworkError.swift */,
+				72726FE3299CF92D006FABB2 /* CharacterNetworkClient.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
 		};
-		72726FE2299CF8FF006FABB2 /* RealmDB */ = {
+		72726FE2299CF8FF006FABB2 /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
 				72E7A8E8297ECA2C00D732F5 /* RealmHelper.swift */,
 				72726FE5299CF94A006FABB2 /* CharacterRDataClient.swift */,
 			);
-			path = RealmDB;
+			path = DataBase;
 			sourceTree = "<group>";
 		};
 		72E7A879297E85F300D732F5 = {
@@ -225,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				72E7A8D2297E916C00D732F5 /* Container.swift */,
+				728D83B32B75012300846528 /* Container+Builders.swift */,
 			);
 			path = DI;
 			sourceTree = "<group>";
@@ -232,7 +238,7 @@
 		72E7A8B8297E863200D732F5 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				72726FE2299CF8FF006FABB2 /* RealmDB */,
+				72726FE2299CF8FF006FABB2 /* DataBase */,
 				72726FE1299CF8F8006FABB2 /* Network */,
 				72E7A8BD297E869600D732F5 /* Repository */,
 				72E7A8E6297EC8E800D732F5 /* DB */,
@@ -607,6 +613,7 @@
 				72726FE6299CF94A006FABB2 /* CharacterRDataClient.swift in Sources */,
 				72E7A8DE297E9FB900D732F5 /* CharacterUseCase.swift in Sources */,
 				72E7A8DA297E986100D732F5 /* CharactersDTO.swift in Sources */,
+				728D83B42B75012300846528 /* Container+Builders.swift in Sources */,
 				72F40445297FB21F00494EA8 /* DetailProtocols.swift in Sources */,
 				72F21FBB29C33B08004A943C /* NetworkError.swift in Sources */,
 				72F40447297FB21F00494EA8 /* DetailViewModel.swift in Sources */,
@@ -619,6 +626,7 @@
 				72F40446297FB21F00494EA8 /* DetailBuilder.swift in Sources */,
 				72E7A886297E85F300D732F5 /* AppDelegate.swift in Sources */,
 				72E7A888297E85F300D732F5 /* SceneDelegate.swift in Sources */,
+				728D83B62B75150200846528 /* NetworkClient.swift in Sources */,
 				72E7A8D3297E916C00D732F5 /* Container.swift in Sources */,
 				72F40442297FB21F00494EA8 /* DetailRouter.swift in Sources */,
 				72E7A8CE297E903100D732F5 /* MainViewController.swift in Sources */,
@@ -793,7 +801,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = SQPG2GUVW5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RickyAndMortyFan/Info.plist;
@@ -806,7 +814,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.RickyAndMortyFan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -821,7 +829,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = SQPG2GUVW5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RickyAndMortyFan/Info.plist;
@@ -834,7 +842,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.RickyAndMortyFan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -965,8 +973,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.46.0;
 			};
 		};
 		72E7A8F5297ED93700D732F5 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {

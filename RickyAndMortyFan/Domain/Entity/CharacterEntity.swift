@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 
 struct CharacterEntity {
+
+    private enum Constants {
+        static let alive = "alive"
+        static let dead = "dead"
+    }
+
     let id: Int
     let name: String
     let status: String
@@ -20,12 +26,23 @@ struct CharacterEntity {
 extension CharacterEntity {
     var isAlive: String {
         switch status.lowercased() {
-        case "alive":
+        case Constants.alive:
             return "🙂"
-        case "dead":
+        case Constants.dead:
             return "☠️"
         default:
-            return "🫤"
+            return "😶‍🌫️"
         }
+    }
+}
+
+extension CharacterEntity {
+    var toRealm: RCharacter {
+        RCharacter(id: self.id,
+                   name: self.name,
+                   status: self.status,
+                   image: self.image,
+                   location: self.location,
+                   episode: self.episode.map { $0 })
     }
 }

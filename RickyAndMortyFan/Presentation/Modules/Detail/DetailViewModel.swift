@@ -14,7 +14,7 @@ final class DetailViewModel {
     private let characterUseCase: CharacterUseCaseProtocol
     private let characterId: Int
 
-    var character: CharacterEntity?
+    private var characterDetail: CharacterEntity?
     var refresh: (() -> Void)?
     var startActivityIndicator: (() -> Void)?
     var stopActivityIndicator: (() -> Void)?
@@ -30,14 +30,16 @@ extension DetailViewModel: DetailViewModelProtocol {
 
     func viewReady() {
         Task {
-            character = try await characterUseCase.getCharacterDetail(id: self.characterId)
-            self.refresh?()
+            do {
+                self.characterDetail = try await characterUseCase.getCharacterDetail(id: self.characterId)
+                self.refresh?()
+            } catch {
+                throw error
+            }
         }
     }
 
-    func viewDidAppear() { }
-
-    func getCharacter() -> CharacterEntity? {
-        return character
+    var character: CharacterEntity? {
+        return characterDetail
     }
 }

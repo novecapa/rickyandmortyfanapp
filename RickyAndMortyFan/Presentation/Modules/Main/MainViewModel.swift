@@ -15,7 +15,7 @@ final class MainViewModel {
 
     private var currentPage = 1
     private var hasNewPage = true
-    var charactersList: [CharacterEntity] = []
+    private var charactersList: [CharacterEntity] = []
     var refreshList: (() -> Void)?
     var startActivityIndicator: (() -> Void)?
     var stopActivityIndicator: (() -> Void)?
@@ -34,29 +34,31 @@ extension MainViewModel: MainViewModelProtocol {
         fetchCharacters()
     }
 
-    func viewDidAppear() { }
-
     func fetchCharacters() {
         Task {
             if !hasNewPage {
                 return
             }
-            self.startActivityIndicator?()
-            let charactersList = try await characterUseCase.getCharacterList(page: currentPage)
-            if self.currentPage == 1 {
-                self.charactersList.removeAll()
-                self.charactersList.append(contentsOf: charactersList.0)
-                self.scrollToTop?()
-            } else {
-                self.charactersList.append(contentsOf: charactersList.0)
+            do {
+                self.startActivityIndicator?()
+                let charactersList = try await characterUseCase.getCharacterList(page: currentPage)
+                if self.currentPage == 1 {
+                    self.charactersList.removeAll()
+                    self.charactersList.append(contentsOf: charactersList.0)
+                    self.scrollToTop?()
+                } else {
+                    self.charactersList.append(contentsOf: charactersList.0)
+                }
+                if charactersList.1 {
+                    currentPage += 1
+                } else {
+                    hasNewPage = false
+                }
+                self.stopActivityIndicator?()
+                self.refreshList?()
+            } catch {
+                throw error
             }
-            if charactersList.1 {
-                currentPage += 1
-            } else {
-                hasNewPage = false
-            }
-            self.stopActivityIndicator?()
-            self.refreshList?()
         }
     }
 
@@ -70,27 +72,32 @@ extension MainViewModel: MainViewModelProtocol {
             if !hasNewPage {
                 return
             }
-            self.startActivityIndicator?()
-            let charactersList = try await characterUseCase.filterCharacter(name: name, page: currentPage)
-            if self.currentPage == 1 {
-                self.charactersList.removeAll()
-                self.charactersList.append(contentsOf: charactersList.0)
-                self.scrollToTop?()
-            } else {
-                self.charactersList.append(contentsOf: charactersList.0)
+            do {
+                self.startActivityIndicator?()
+                let charactersList = try await characterUseCase.filterCharacter(name: name, page: currentPage)
+                if self.currentPage == 1 {
+                    self.charactersList.removeAll()
+                    self.charactersList.append(contentsOf: charactersList.0)
+                    self.scrollToTop?()
+                } else {
+                    self.charactersList.append(contentsOf: charactersList.0)
+                }
+                if charactersList.1 {
+                    currentPage += 1
+                } else {
+                    hasNewPage = false
+                }
+                self.stopActivityIndicator?()
+                self.refreshList?()
+            } catch {
+                throw error
             }
-            if charactersList.1 {
-                currentPage += 1
-            } else {
-                hasNewPage = false
-            }
-            self.stopActivityIndicator?()
-            self.refreshList?()
         }
     }
 
-    func getCharacterList() -> [CharacterEntity] {
-        return charactersList
+    var characters: [CharacterEntity] {
+        get { charactersList }
+        set { charactersList = newValue }
     }
 
     func showCharacterDetail(characterId: Int) {

@@ -8,103 +8,67 @@
 import Foundation
 
 protocol CharacterNetworkClientProtocol {
-    func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool)
-    func filterCharacter(name: String, page: Int) async throws -> ([CharacterEntity], Bool)
-    func getCharacterDetail(id: Int) async throws -> (CharacterEntity)
+    func getCharacterList(page: Int) async throws -> CharactersDTO
+    func filterCharacter(name: String, page: Int) async throws -> CharactersDTO
+    func getCharacterDetail(id: Int) async throws -> CharacterDTO
+}
+
+private enum Endpoints {
+
+    static let baseURL = "https://rickandmortyapi.com/api/"
+
+    enum Constants {
+        static let character = "character"
+        static let page = "page"
+        static let name = "name"
+    }
+
+    case list(Int)
+    case filterCharacter(Int, String)
+    case detail(Int)
+    var rawValue: String {
+        switch self {
+        case .list(let page):
+            return "\(Constants.character)/?\(Constants.page)=\(page)"
+        case .filterCharacter(let page, let name):
+            return "\(Constants.character)/?\(Constants.page)=\(page)&\(Constants.name)=\(name)"
+        case .detail(let id):
+            return "\(Constants.character)/\(id)"
+        }
+    }
 }
 
 final class CharacterNetworkClient: CharacterNetworkClientProtocol {
 
-    final let baseURL = "https://rickandmortyapi.com/api/"
+    let networkClient: NetworkClient
+    init(networkClient: NetworkClient = NetworkClient()) {
+        self.networkClient = networkClient
+    }
 
-    func getCharacterList(page: Int) async throws -> ([CharacterEntity], Bool) {
-        guard let url = URL(string: "\(baseURL)character/?page=\(page)") else {
-            throw NetworkError.badURL
-        }
-        let request = URLRequest(url: url)
+    func getCharacterList(page: Int) async throws -> CharactersDTO {
         do {
-            let (data, response) = try await URLSession.shared.data(for: request)
-            guard let response = response as? HTTPURLResponse else {
-                throw NetworkError.invalidResponse
-            }
-            let decoder = JSONDecoder()
-            do {
-                if (200..<300).contains(response.statusCode) {
-                    let result = try decoder.decode(CharactersDTO.self, from: data)
-                    var hasNextPage = false
-                    guard let nextPage = result.info.next else {
-                        hasNextPage = false
-                        return (result.results.map { $0.toEntity }, hasNextPage)
-                    }
-                    hasNextPage = !nextPage.isEmpty ? true : false
-                    let characList = result.results.map { $0.toEntity }
-                    return (characList, hasNextPage)
-                } else {
-                    throw NetworkError.badResponse
-                }
-            } catch {
-                throw NetworkError.decodeError
-            }
+            let url = Endpoints.baseURL + Endpoints.list(page).rawValue
+            return try await networkClient.load(urlString: url, of: CharactersDTO.self)
         } catch {
-            throw NetworkError.badRequest
+            throw error
         }
     }
 
-    func filterCharacter(name: String, page: Int) async throws -> ([CharacterEntity], Bool) {
-        guard let url = URL(string: "\(baseURL)character/?page=\(page)&name=\(name)") else {
-            throw NetworkError.badURL
-        }
-        let request = URLRequest(url: url)
+    func filterCharacter(name: String, page: Int) async throws -> CharactersDTO {
         do {
-            let (data, response) = try await URLSession.shared.data(for: request)
-            guard let response = response as? HTTPURLResponse else {
-                throw NetworkError.invalidResponse
-            }
-            let decoder = JSONDecoder()
-            do {
-                if (200..<300).contains(response.statusCode) {
-                    let result = try decoder.decode(CharactersDTO.self, from: data)
-                    var hasNextPage = false
-                    guard let nextPage = result.info.next else {
-                        hasNextPage = false
-                        return (result.results.map { $0.toEntity }, hasNextPage)
-                    }
-                    hasNextPage = !nextPage.isEmpty ? true : false
-                    return (result.results.map { $0.toEntity }, hasNextPage)
-                } else {
-                    throw NetworkError.badResponse
-                }
-            } catch {
-                throw NetworkError.decodeError
-            }
+            let url = Endpoints.baseURL + Endpoints.filterCharacter(page, name).rawValue
+            return try await networkClient.load(urlString: url, of: CharactersDTO.self)
         } catch {
-            throw NetworkError.badRequest
+            throw error
         }
     }
 
-    func getCharacterDetail(id: Int) async throws -> (CharacterEntity) {
-        guard let url = URL(string: "\(baseURL)character/\(id)") else {
-            throw NetworkError.badURL
-        }
-        let request = URLRequest(url: url)
+    func getCharacterDetail(id: Int) async throws -> CharacterDTO {
         do {
-            let (data, response) = try await URLSession.shared.data(for: request)
-            guard let response = response as? HTTPURLResponse else {
-                throw NetworkError.invalidResponse
-            }
-            let decoder = JSONDecoder()
-            do {
-                if (200..<300).contains(response.statusCode) {
-                    let result = try decoder.decode(CharacterDTO.self, from: data)
-                    return result.toEntity
-                } else {
-                    throw NetworkError.badResponse
-                }
-            } catch {
-                throw NetworkError.decodeError
-            }
+            let url = Endpoints.baseURL + Endpoints.detail(id).rawValue
+            return try await networkClient.load(urlString: url, of: CharacterDTO.self)
         } catch {
-            throw NetworkError.badRequest
+            throw error
         }
     }
 }

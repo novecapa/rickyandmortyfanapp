@@ -39,10 +39,6 @@ class MainViewModelTests: XCTestCase {
         XCTAssertNotNil(model.viewReady)
         model.viewReady()
     }
-    func testViewDidAppear() {
-        XCTAssertNotNil(model.viewDidAppear)
-        model.viewDidAppear()
-    }
     func testResetPagination() {
         XCTAssertNotNil(model.resetPagination)
         model.resetPagination()

@@ -13,6 +13,10 @@ final class DetailViewController: UIViewController {
 
     static let identifier = "DetailViewController"
 
+    private enum Constants {
+        static let cornerRadius: Double = 6.0
+    }
+
 	var viewModel: DetailViewModelProtocol!
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
@@ -22,7 +26,7 @@ final class DetailViewController: UIViewController {
     }
     @IBOutlet weak var imageDetail: UIImageView! {
         didSet {
-            imageDetail.layer.cornerRadius = 6.0
+            imageDetail.layer.cornerRadius = Constants.cornerRadius
             imageDetail.layer.masksToBounds = true
         }
     }
@@ -36,11 +40,6 @@ final class DetailViewController: UIViewController {
         super.viewDidLoad()
         setupBindings()
         viewModel.viewReady()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		viewModel.viewDidAppear()
     }
 
     private func setupBindings() {
@@ -57,11 +56,13 @@ final class DetailViewController: UIViewController {
         }
         viewModel.refresh = { [weak self] in
             DispatchQueue.main.async {
-                if let character = self?.viewModel.getCharacter() {
+                if let character = self?.viewModel.character {
                     self?.imageDetail.sd_setImage(with: URL(string: character.image))
                     self?.labelName.text = "\(character.name) (\(character.status.capitalized))"
-                    self?.labelLocation.text = "Location: \(character.location)"
-                    self?.labelEpisodes.text = "Appears on \(character.episode.count) episodes"
+                    self?.labelLocation.text = "\(NSLocalizedString("Location:", comment: "")) \(character.location)"
+                    let appearsOn = NSLocalizedString("Appears on", comment: "")
+                    let episodes = NSLocalizedString("episodes", comment: "")
+                    self?.labelEpisodes.text = "\(appearsOn) \(character.episode.count) \(episodes)"
                 }
             }
         }

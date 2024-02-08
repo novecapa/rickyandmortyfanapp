@@ -15,12 +15,3 @@ class Container {
     weak var window: UIWindow?
     weak var homeViewController: UIViewController?
 }
-// MARK: Builders
-extension Container {
-    func mainBuilder() -> MainBuilder {
-        return MainBuilder()
-    }
-    func detailBuilder() -> DetailBuilder {
-        return DetailBuilder()
-    }
-}

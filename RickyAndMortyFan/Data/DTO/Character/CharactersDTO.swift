@@ -19,6 +19,14 @@ struct InfoDTO: Codable {
     let next: String?
     let prev: String?
 }
+extension InfoDTO {
+    var hasNextPage: Bool {
+        guard let nextPage = self.next else {
+            return false
+        }
+        return !nextPage.isEmpty ? true : false
+    }
+}
 
 // MARK: - Result
 struct CharacterDTO: Codable {
@@ -34,7 +42,6 @@ struct LocationDTO: Codable {
     let name: String
     let url: String
 }
-
 extension CharacterDTO {
     var toEntity: CharacterEntity {
         return CharacterEntity(id: self.id,
