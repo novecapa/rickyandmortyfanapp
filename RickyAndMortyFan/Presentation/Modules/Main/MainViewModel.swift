@@ -15,7 +15,7 @@ final class MainViewModel {
 
     private var currentPage = 1
     private var hasNewPage = true
-    private var charactersList: [CharacterEntity] = []
+    var charactersList: [CharacterEntity] = []
     var refreshList: (() -> Void)?
     var startActivityIndicator: (() -> Void)?
     var stopActivityIndicator: (() -> Void)?
@@ -96,8 +96,7 @@ extension MainViewModel: MainViewModelProtocol {
     }
 
     var characters: [CharacterEntity] {
-        get { charactersList }
-        set { charactersList = newValue }
+        charactersList
     }
 
     func showCharacterDetail(characterId: Int) {

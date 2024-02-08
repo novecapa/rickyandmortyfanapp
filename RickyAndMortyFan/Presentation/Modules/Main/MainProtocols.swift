@@ -15,7 +15,7 @@ protocol MainViewModelProtocol {
     func fetchCharacters()
     func filterCharacters(name: String)
     func resetPagination()
-    var characters: [CharacterEntity] { get set }
+    var characters: [CharacterEntity] { get }
     // MARK: -
     var refreshList: (() -> Void)? { get set }
     var startActivityIndicator: (() -> Void)? { get set }

@@ -74,8 +74,8 @@ class MainViewControllerTests: XCTestCase {
     // MARK: - Collection View
     func testCellForRow() {
         XCTAssertNotNil(viewController)
-        model.characters = CharacterEntityMock.getListMock()
-        XCTAssertFalse(model.characters.isEmpty)
+        model.charactersList = CharacterEntityMock.getListMock()
+        XCTAssertFalse(model.charactersList.isEmpty)
         let indexPath = IndexPath(item: 0, section: 0)
         _ = viewController.collectionView(viewController.collectionCharacters,
                                           cellForItemAt: indexPath)
@@ -83,8 +83,8 @@ class MainViewControllerTests: XCTestCase {
 
     func testDidSelectItemAt() {
         XCTAssertNotNil(viewController)
-        model.characters = CharacterEntityMock.getListMock()
-        XCTAssertFalse(model.characters.isEmpty)
+        model.charactersList = CharacterEntityMock.getListMock()
+        XCTAssertFalse(model.charactersList.isEmpty)
         let indexPath = IndexPath(item: 0, section: 0)
         viewController.collectionView(viewController.collectionCharacters,
                                       didSelectItemAt: indexPath)
