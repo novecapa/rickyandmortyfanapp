@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		722B13272B7A85D3004DA976 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722B13262B7A85D3004DA976 /* Endpoints.swift */; };
 		72726FE4299CF92D006FABB2 /* CharacterNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72726FE3299CF92D006FABB2 /* CharacterNetworkClient.swift */; };
 		72726FE6299CF94A006FABB2 /* CharacterRDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72726FE5299CF94A006FABB2 /* CharacterRDataClient.swift */; };
 		728D83B42B75012300846528 /* Container+Builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728D83B32B75012300846528 /* Container+Builders.swift */; };
@@ -71,6 +72,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		722B13262B7A85D3004DA976 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		72726FE3299CF92D006FABB2 /* CharacterNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterNetworkClient.swift; sourceTree = "<group>"; };
 		72726FE5299CF94A006FABB2 /* CharacterRDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRDataClient.swift; sourceTree = "<group>"; };
 		728D83B32B75012300846528 /* Container+Builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Builders.swift"; sourceTree = "<group>"; };
@@ -146,6 +148,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		722B13282B7A85F9004DA976 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				72E7A8B6297E862400D732F5 /* Helpers */,
+				722B13262B7A85D3004DA976 /* Endpoints.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		72726FE1299CF8F8006FABB2 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,7 +170,6 @@
 		72726FE2299CF8FF006FABB2 /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
-				72E7A8E8297ECA2C00D732F5 /* RealmHelper.swift */,
 				72726FE5299CF94A006FABB2 /* CharacterRDataClient.swift */,
 			);
 			path = DataBase;
@@ -190,7 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				72E7A893297E85F400D732F5 /* Info.plist */,
-				72E7A8B6297E862400D732F5 /* Helpers */,
+				722B13282B7A85F9004DA976 /* Core */,
 				72E7A8B7297E862B00D732F5 /* DI */,
 				72E7A8B8297E863200D732F5 /* Data */,
 				72E7A8B9297E863A00D732F5 /* Domain */,
@@ -221,6 +231,7 @@
 		72E7A8B6297E862400D732F5 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				72E7A8E8297ECA2C00D732F5 /* RealmHelper.swift */,
 				72E7A8EC297ECE2200D732F5 /* Utils.swift */,
 			);
 			path = Helpers;
@@ -621,6 +632,7 @@
 				72E7A8D7297E937700D732F5 /* CharacterCell.swift in Sources */,
 				72E7A8ED297ECE2200D732F5 /* Utils.swift in Sources */,
 				72F40444297FB21F00494EA8 /* DetailViewController.swift in Sources */,
+				722B13272B7A85D3004DA976 /* Endpoints.swift in Sources */,
 				72E7A8DC297E9DE800D732F5 /* CharacterRepository.swift in Sources */,
 				72E7A8EB297ECADD00D732F5 /* RCharacter.swift in Sources */,
 				72F40446297FB21F00494EA8 /* DetailBuilder.swift in Sources */,

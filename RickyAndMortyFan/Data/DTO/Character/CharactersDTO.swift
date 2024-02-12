@@ -44,11 +44,11 @@ struct LocationDTO: Codable {
 }
 extension CharacterDTO {
     var toEntity: CharacterEntity {
-        return CharacterEntity(id: self.id,
-                               name: self.name,
-                               status: self.status,
-                               image: self.image,
-                               location: self.location.name,
-                               episode: self.episode.map { $0 })
+        CharacterEntity(id: self.id,
+                        name: self.name,
+                        status: self.status,
+                        image: self.image,
+                        location: self.location.name,
+                        episode: self.episode.map { $0 })
     }
 }

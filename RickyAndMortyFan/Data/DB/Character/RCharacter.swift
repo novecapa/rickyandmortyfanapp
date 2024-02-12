@@ -33,17 +33,17 @@ class RCharacter: Object {
     }
 
     public override static func primaryKey() -> String {
-        return "id"
+        "id"
     }
 }
 
 extension RCharacter {
     var toEntity: CharacterEntity {
-        return CharacterEntity(id: self.id,
-                               name: self.name,
-                               status: self.status,
-                               image: self.image,
-                               location: self.location,
-                               episode: self.episode.map { $0 })
+        CharacterEntity(id: self.id,
+                        name: self.name,
+                        status: self.status,
+                        image: self.image,
+                        location: self.location,
+                        episode: self.episode.map { $0 })
     }
 }

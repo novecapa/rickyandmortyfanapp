@@ -7,12 +7,17 @@
 
 import Foundation
 
-class NetworkClient {
+protocol NetworkClientProtocol {
+    func load<T: Decodable>(urlString: String, of type: T.Type) async throws -> T
+}
+
+class NetworkClient: NetworkClientProtocol {
     func load<T: Decodable>(urlString: String, of type: T.Type) async throws -> T {
         guard let url = URL(string: urlString) else {
             throw NetworkError.badURL
         }
-        let request = URLRequest(url: url)
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             guard let response = response as? HTTPURLResponse else {
