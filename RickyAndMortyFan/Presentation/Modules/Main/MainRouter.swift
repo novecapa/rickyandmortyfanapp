@@ -11,16 +11,19 @@ import UIKit
 
 final class MainRouter {
 	private weak var viewController: UIViewController?
+    private let container: Container
 
-	required init(viewController: UIViewController?) {
+	required init(viewController: UIViewController?, container: Container = Container.shared) {
         self.viewController = viewController
+        self.container = container
     }
 }
 
 extension MainRouter: MainRouterProtocol {
-    func showDetail(viewController: UIViewController) {
+    func showDetail(characterId: Int) {
         DispatchQueue.main.async {
-            self.viewController?.present(viewController, animated: true)
+            let detailViewController = self.container.detailBuilder().build(characterId: characterId)
+            self.viewController?.present(detailViewController, animated: true)
         }
     }
 }

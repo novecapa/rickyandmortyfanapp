@@ -26,7 +26,7 @@ protocol MainViewModelProtocol {
 }
 
 protocol MainRouterProtocol {
-    func showDetail(viewController: UIViewController)
+    func showDetail(characterId: Int)
 }
 
 protocol MainBuilderProtocol {

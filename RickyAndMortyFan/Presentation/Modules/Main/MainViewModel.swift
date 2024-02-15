@@ -100,7 +100,6 @@ extension MainViewModel: MainViewModelProtocol {
     }
 
     func showCharacterDetail(characterId: Int) {
-        let detailViewController = Container.shared.detailBuilder().build(characterId: characterId)
-        router.showDetail(viewController: detailViewController)
+        router.showDetail(characterId: characterId)
     }
 }
