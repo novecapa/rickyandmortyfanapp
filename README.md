@@ -1,5 +1,5 @@
 
-# Ricky and Morty fan app
+# Rick and Morty fan app
 
 Proyecto en el que consultaremos los personajes de la serie, mediante la API https://rickandmortyapi.com.
 
@@ -17,7 +17,7 @@ Proyecto en el que consultaremos los personajes de la serie, mediante la API htt
 
 ## Librerías
 
-En el proyecto utilizamos 2 librerías: SD Web Image y Realm (MongoDb)
+En el proyecto utilizamos 2 librerías: SD Web Image y Realm (MongoDB)
 
 La librería SD Web Image, la utilizamos para cachear las imágenes de forma que aunque no dispongamos de internet, podremos visualizarlas.
 
